@@ -1,16 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
 import React from "react";
 import { useState } from "react";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
 import Image from "next/image";
 import preview from "@/assets/logo2.png";
-
 import logo from "@/assets/logo.png";
-
 import Link from "next/link";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";

@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import {  Modal, message as AntMessage } from "antd";
-// import { IoMdNotificationsOutline } from "react-icons/io";
+import { Modal, message as AntMessage, Badge } from "antd";
+import { IoMdNotificationsOutline } from "react-icons/io";
 
-// import { LuMessageCircleMore } from "react-icons/lu";
+import { LuMessageCircleMore } from "react-icons/lu";
 import Image from "next/image";
 // import { useGetMyProfileQuery } from "@/redux/api/settingsApi";
 import {
@@ -16,9 +16,9 @@ import icon from "@/assets/icons/navbar Top.png";
 import userImage from "@/assets/images/userImage.jpg";
 import { useSelector } from "react-redux";
 import { useAuth } from "@/redux/features/authSlice";
+import Link from "next/link";
 
 // import Link from "next/link";
-
 
 type NotificationType = {
   id: string;
@@ -41,11 +41,11 @@ const TopNavbar = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const notifications: NotificationType[] = notificationsData?.result || [];
-  const authState = useSelector(useAuth)
-  console.log("to navbar",authState);
-  console.log("to navbar",authState?.adminInfo?.profileImage);
+  const authState = useSelector(useAuth);
+  console.log("to navbar", authState);
+  console.log("to navbar", authState?.adminInfo?.profileImage);
 
-  // const unreadCount = notifications.filter((n) => !n.isRead).length;
+  const unreadCount = notifications.filter((n) => !n.isRead).length;
 
   const handleMarkAsRead = async (id: string) => {
     const payload: UpdateNotificationPayload = {
@@ -64,39 +64,41 @@ const TopNavbar = () => {
   return (
     <>
       <div className="bg-white flex justify-between items-center gap-2 font-bold w-full h-[81px] px-4 md:px-6 py-4 sticky top-0 z-40  ">
-        <h1 className="md:text-2xl flex justify-center items-center gap-5"><span><Image
+        <h1 className="md:text-2xl flex justify-center items-center gap-7">
+          <span>
+            <Image
               src={icon}
               height={50}
               width={50}
               alt="avatar"
               className="rounded-full w-5 h-5"
               priority
-            /></span>Overview</h1>
+            />
+          </span>
+          Overview
+        </h1>
 
         <div className="flex justify-end items-center gap-6">
-            {/* message Icon */}
-       {/*   <Link href="/message">
-          <div
-            className="bg-white shadow rounded-full px-2 py-1 h-full cursor-pointer"
-           
-          >
-            <Badge count={unreadCount} size="small">
-              <LuMessageCircleMore className="w-6 h-6 text-gray-500" />
-            </Badge>
-          </div>
-         </Link> */}
+          {/* message Icon */}
+          <Link href="/message">
+            <div className="bg-white shadow rounded-full px-2 py-1 h-full cursor-pointer">
+              <Badge count={unreadCount} size="small">
+                <LuMessageCircleMore className="w-6 h-6 text-gray-500" />
+              </Badge>
+            </div>
+          </Link>
           {/* Notification Icon */}
-        {/*   <div
+          <div
             className="bg-white shadow rounded-full px-2 py-1 h-full cursor-pointer"
             onClick={() => setIsModalOpen(true)}
           >
             <Badge count={unreadCount} size="small">
               <IoMdNotificationsOutline className="w-6 h-6 text-gray-500" />
             </Badge>
-          </div> */}
+          </div>
 
           {/* Profile */}
-          <div >
+          <div>
             <Image
               src={authState?.adminInfo?.profileImage || userImage}
               height={50}
@@ -105,8 +107,6 @@ const TopNavbar = () => {
               className="rounded-full w-10 h-10 object-cover"
               priority
             />
-        
-           
           </div>
         </div>
       </div>

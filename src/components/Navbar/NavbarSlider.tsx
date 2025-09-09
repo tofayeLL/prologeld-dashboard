@@ -106,10 +106,11 @@ const NavbarSlider = ({ isOpen, toggleSidebar }: SidebarProps) => {
           isOpen ? "w-[320px]" : "w-[80px]"
         }`}
       >
-        <div className="flex flex-col h-full">
-          {/* Logo */}
+        <div className="flex flex-col h-full ">
+         <div className="flex justify-start items-center p-6 gap-5">
+           {/* Logo */}
           {isOpen && (
-            <Link href="/" className="hidden lg:flex justify-start p-6">
+            <Link href="/" className="hidden lg:flex justify-start p-0">
               <Image
                 width={250}
                 height={250}
@@ -121,6 +122,9 @@ const NavbarSlider = ({ isOpen, toggleSidebar }: SidebarProps) => {
             </Link>
           )}
 
+          <p className="lg:text-3xl text-lg font-semibold text-[#0D9488]">PrologELD</p>
+         </div>
+
           <div className={`flex flex-col ${isOpen ? "pt-0" : ""}`}>
             {/* Navigation */}
             <ul className="m-4 lg:m-6">
@@ -128,10 +132,10 @@ const NavbarSlider = ({ isOpen, toggleSidebar }: SidebarProps) => {
                 <li key={item?.route}>
                   <Link
                     href={item?.route}
-                    className={`flex items-center gap-2 px-4 py-2 mb-2 rounded-lg hover:bg-[#00A8CC] hover:text-white transition-colors duration-300 ease-in-out 
+                    className={`flex items-center gap-2 px-4 py-2 mb-2 rounded-lg hover:bg-[#0D9488] hover:text-white transition-colors duration-300 ease-in-out 
                     ${
                       path === item?.route
-                        ? "bg-[#00A8CC] text-white"
+                        ? "bg-[#0D9488] text-white"
                         : "text-[#817F9B]"
                     }`}
                   >
@@ -150,7 +154,7 @@ const NavbarSlider = ({ isOpen, toggleSidebar }: SidebarProps) => {
           <div className="mt-auto p-6">
             <button
               onClick={handleLogOut}
-              className="flex items-center justify-start gap-2 text-[#D00E11] hover:text-red-400 transition-colors rounded-md bg-[#D00E111A] hover:bg-[#EF444433] w-full py-2 px-4"
+              className="flex items-center cursor-pointer justify-start gap-2 text-[#D00E11] hover:text-red-400 transition-colors rounded-md bg-[#D00E111A] hover:bg-[#EF444433] w-full py-2 px-4"
             >
               <RiLogoutCircleRLine size={18} />
               {isOpen && <span className="text-lg">Log out</span>}
