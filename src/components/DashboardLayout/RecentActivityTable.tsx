@@ -2,9 +2,7 @@
 import React from "react";
 
 import { useState } from "react";
-import eye from "@/assets/eyeIcon.png";
-import deleteIcon from "@/assets/icons/Warden Management/Delete.png";
-import edit from "@/assets/icons/Warden Management/Edit Square.png";
+
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -21,56 +19,122 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
 
-interface ActivityData {
+import Image from "next/image";
+import userImage from "@/assets/User.png";
+
+interface DriverPerformanceData {
   id: string;
-  date: string;
-  user: string;
-  details: string;
-  status: {
-    label: string;
-    variant: "default" | "secondary" | "destructive" | "outline";
-    color: string;
+  profile: {
+    name: string;
+    image?: string;
   };
+  tripsCompleted: number;
+  safetyScore: {
+    current: number;
+    max: number;
+  };
+  harshBraking: {
+    current: number;
+    max: number;
+  };
+  speeding: number;
+  totalScore: number;
 }
 
-const mockData: ActivityData[] = [
+const mockData: DriverPerformanceData[] = [
   {
     id: "1",
-    date: "2024-01-11",
-    user: "Jessica Wilson",
-    details: "Training: First Aid",
-    status: {
-      label: "Training Completed",
-      variant: "default",
-      color: "bg-blue-100 text-blue-800 hover:bg-blue-100",
+    profile: {
+      name: "John Doe",
     },
+    tripsCompleted: 35,
+    safetyScore: {
+      current: 90,
+      max: 100,
+    },
+    harshBraking: {
+      current: 45,
+      max: 100,
+    },
+    speeding: 2,
+    totalScore: 85,
   },
   {
     id: "2",
-    date: "2024-01-14",
-    user: "David Lee",
-    details: "Case ID: 56548544",
-    status: {
-      label: "Case Escalated",
-      variant: "secondary",
-      color: "bg-yellow-100 text-yellow-800 hover:bg-yellow-100",
+    profile: {
+      name: "Sarah Johnson",
     },
+    tripsCompleted: 42,
+    safetyScore: {
+      current: 75,
+      max: 100,
+    },
+    harshBraking: {
+      current: 30,
+      max: 100,
+    },
+    speeding: 5,
+    totalScore: 70,
   },
   {
     id: "3",
-    date: "2024-01-15",
-    user: "Sarah Miller",
-    details: "Report ID: 12344755",
-    status: {
-      label: "Report Submitted",
-      variant: "destructive",
-      color: "bg-red-100 text-red-800 hover:bg-red-100",
+    profile: {
+      name: "Mike Wilson",
     },
+    tripsCompleted: 28,
+    safetyScore: {
+      current: 95,
+      max: 100,
+    },
+    harshBraking: {
+      current: 60,
+      max: 100,
+    },
+    speeding: 1,
+    totalScore: 92,
   },
 ];
+
+// Progress Bar Component
+interface ProgressBarProps {
+  current: number;
+  max: number;
+  showText?: boolean;
+  size?: "sm" | "md";
+  colorScheme?: "green" | "yellow" | "red" | "blue";
+}
+
+export const  ProgressBar: React.FC<ProgressBarProps> = ({
+  current,
+  max,
+  showText = true,
+  size = "md",
+
+}) => {
+  const percentage = Math.min((current / max) * 100, 100);
+  
+  // Color schemes for different types of scores
+ 
+
+  const heightClass = size === "sm" ? "h-2" : "h-3";
+
+  return (
+    <div className="flex items-center gap-3">
+      <div className={`flex-1 bg-gray-200 rounded-full ${heightClass} overflow-hidden`}>
+        <div
+          className={`${heightClass} } rounded-full transition-all duration-300 ease-in-out`}
+          style={{ width: `${percentage}%` }}
+        />
+      </div>
+      {showText && (
+        <span className="text-sm font-medium text-gray-700 min-w-[50px]">
+          {current}/{max}
+        </span>
+      )}
+    </div>
+  );
+};
 
 const RecentActivityTable = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -93,7 +157,7 @@ const RecentActivityTable = () => {
           {/* Header with filters */}
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold text-gray-900">
-              Recent Activity
+              Driver Performance
             </h2>
             <div className="flex items-center gap-4">
               <Select
@@ -133,81 +197,67 @@ const RecentActivityTable = () => {
             <Table className="">
               <TableHeader className="bg-[#F8FAFC]">
                 <TableRow className="border-b">
-                  <TableHead className=" text-base font-semibold">Date</TableHead>
-                  <TableHead className=" text-base font-semibold">User</TableHead>
-                  <TableHead className=" text-base font-semibold">
-                    Details
+                  <TableHead className="text-base font-semibold">
+                    Profile
                   </TableHead>
-                  <TableHead className=" text-base font-semibold">
-                    Status
+                  <TableHead className="text-base font-semibold">
+                    Trips Completed
                   </TableHead>
-                  <TableHead className=" text-base font-semibold">
-                    Action
+                  <TableHead className="text-base font-semibold">
+                    Safety Score
+                  </TableHead>
+                  <TableHead className="text-base font-semibold">
+                    Harsh Braking
+                  </TableHead>
+                  <TableHead className="text-base font-semibold">
+                    Speeding
+                  </TableHead>
+                  <TableHead className="text-base font-semibold">
+                    Total Score
                   </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {mockData.map((item) => (
                   <TableRow key={item.id} className="border-b last:border-b-0">
-                    <TableCell className="font-medium text-gray-900 py-3">
-                      {item.date}
+                    <TableCell className="font-medium text-gray-700 py-3 flex justify-start items-center gap-2">
+                      <div className="relative">
+                        <Image
+                          src={userImage}
+                          alt="eye"
+                          height={50}
+                          width={50}
+                          className="object-cover w-10 h-10 object-center rounded-md"
+                          priority
+                        />
+                      </div>{" "}
+                      {"John Doe"}
                     </TableCell>
+                    <TableCell className="text-gray-700 py-3">35</TableCell>
                     <TableCell className="text-gray-700 py-3">
-                      {item.user}
-                    </TableCell>
-                    <TableCell className="text-gray-700 py-3">
-                      {item.details}
+                      <div>
+                        <p>90/100</p>
+                        <div className="mt-2 flex-1 bg-gray-200 lg:w-[60%] rounded-full h-2 overflow-hidden">
+                          <div
+                            className="h-2 bg-green-500  rounded-full transition-all duration-300 ease-in-out"
+                            style={{ width: "90%" }}
+                          />
+                        </div>
+                      </div>
                     </TableCell>
                     <TableCell className="py-3">
-                      <Badge
-                        variant="secondary"
-                        className={`${item.status.color} border-0 font-medium py-2 w-[65%] `}
-                      >
-                        {item.status.label}
-                      </Badge>
+                     2
                     </TableCell>
-                    <TableCell className="py-3">
-                      <div className="flex gap-4">
-                        <button className="w-10 h-10 flex items-center justify-center rounded-lg">
-                          <div className="relative">
-                            <Image
-                              src={eye}
-                              alt="eye"
-                              height={50}
-                              width={50}
-                              className="object-cover w-6 h-6 object-center"
-                              priority
-                            />
-                          </div>
-                        </button>
-
-                        {/* edit button */}
-                        <button className="w-10 h-10 flex items-center justify-center rounded-lg">
-                          <div className="relative">
-                            <Image
-                              src={edit}
-                              alt="edit"
-                              height={50}
-                              width={50}
-                              className="object-cover w-6 h-6 object-center"
-                              priority
-                            />
-                          </div>
-                        </button>
-
-                        {/* delete button */}
-                        <button className="w-10 h-10 flex items-center justify-center rounded-lg">
-                          <div className="relative">
-                            <Image
-                              src={deleteIcon}
-                              alt="delete"
-                              height={50}
-                              width={50}
-                              className="object-cover w-6 h-6 object-center"
-                              priority
-                            />
-                          </div>
-                        </button>
+                    <TableCell className="py-3">2</TableCell>
+                       <TableCell className="py-3">
+                      <div>
+                        <p>45/100</p>
+                        <div className="mt-2 flex-1 bg-gray-200 lg:w-[60%] rounded-full h-2 overflow-hidden">
+                          <div
+                            className="h-2 bg-blue-500 rounded-full transition-all duration-300 ease-in-out"
+                            style={{ width: "45%" }}
+                          />
+                        </div>
                       </div>
                     </TableCell>
                   </TableRow>
