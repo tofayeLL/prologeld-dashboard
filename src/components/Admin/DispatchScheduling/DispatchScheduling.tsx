@@ -26,6 +26,10 @@ import { Loading } from "@/components/ui/loading";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import userImage from "@/assets/User.png";
+import { Badge } from "@/components/ui/badge";
+
+import deleteIcon from "@/assets/icons/Warden Management/Delete.png";
+import edit from "@/assets/edit.png";
 
 const DispatchScheduling = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -132,6 +136,12 @@ const DispatchScheduling = () => {
                     <TableHead className=" text-base text-gray-700 font-semibold">
                       Delivery Date
                     </TableHead>
+                    <TableHead className=" text-base text-gray-700 font-semibold">
+                      Status
+                    </TableHead>
+                    <TableHead className=" text-base text-gray-700 font-semibold">
+                      Action
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
 
@@ -168,6 +178,45 @@ const DispatchScheduling = () => {
                       </TableCell>
 
                       <TableCell className="py-3">16-03-2025</TableCell>
+                      <TableCell className="py-3">
+                        <Badge
+                          variant="secondary"
+                          className="bg-[#EEF9E8] text-[#53C31B] px-2 py-1 text-sm"
+                        >
+                          Completed
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="py-3">
+                        <div className="flex ">
+                          {/* edit button */}
+                          <button className="w-10 h-10 flex items-center justify-center rounded-lg">
+                            <div className="relative">
+                              <Image
+                                src={edit}
+                                alt="edit"
+                                height={50}
+                                width={50}
+                                className="object-cover w-6 h-6 object-center"
+                                priority
+                              />
+                            </div>
+                          </button>
+
+                          {/* delete button */}
+                          <button className="w-10 h-10 flex items-center justify-center rounded-lg">
+                            <div className="relative">
+                              <Image
+                                src={deleteIcon}
+                                alt="delete"
+                                height={50}
+                                width={50}
+                                className="object-cover w-6 h-6 object-center"
+                                priority
+                              />
+                            </div>
+                          </button>
+                        </div>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
