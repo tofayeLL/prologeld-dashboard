@@ -65,7 +65,7 @@ const Vehicle = () => {
       <div>
         {/* header title */}
         <div className=" rounded-2xl p-6 flex justify-between items-center mb-6">
-          <h1 className="lg:text-3xl text-xl font-medium">
+          <h1 className="lg:text-3xl text-xl font-semibold text-gray-800">
             Vehicle Management
           </h1>
           <div>
