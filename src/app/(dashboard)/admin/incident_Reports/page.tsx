@@ -1,10 +1,12 @@
-import RespondersManagement from '@/components/Admin/RespondersManagement/RespondersManagement';
+import IncidentReports from '@/components/Admin/IncidentReports/IncidentReports';
 import React from 'react';
 
 const page = () => {
     return (
         <div>
-           <RespondersManagement />
+
+            <IncidentReports></IncidentReports>
+
             
         </div>
     );

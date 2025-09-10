@@ -1,12 +1,10 @@
-import Training from '@/components/Admin/Training/Training';
+import Drivers from '@/components/Admin/Drivers/Drivers';
 import React from 'react';
 
 const page = () => {
     return (
         <div>
-
-            <Training />
-           
+            <Drivers></Drivers>
             
         </div>
     );

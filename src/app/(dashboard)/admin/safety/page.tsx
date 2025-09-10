@@ -1,10 +1,10 @@
-import Cases from '@/components/Admin/Cases/Cases';
+import Safety from '@/components/Admin/Safety/Safety';
 import React from 'react';
 
 const page = () => {
     return (
         <div>
-           <Cases />
+            <Safety></Safety>
             
         </div>
     );

@@ -249,7 +249,7 @@ const RecentActivityTable = () => {
                      2
                     </TableCell>
                     <TableCell className="py-3">2</TableCell>
-                       <TableCell className="py-3">
+                       <TableCell className="py-3"> 
                       <div>
                         <p>45/100</p>
                         <div className="mt-2 flex-1 bg-gray-200 lg:w-[60%] rounded-full h-2 overflow-hidden">
