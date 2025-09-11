@@ -2,9 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState } from "react";
-// import { useState } from "react";
-// import eye from "@/assets/eyeIcon.png";
-// import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -25,7 +22,6 @@ import { useGetAllRespondersQuery } from "@/redux/api/adminApi";
 import { Loading } from "@/components/ui/loading";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-
 
 import eye from "@/assets/eyeIcon.png";
 
@@ -61,7 +57,6 @@ const NotificationSender = () => {
         </div>
 
         {/* table */}
-
         <div className="bg-white p-6 rounded-2xl">
           <div className="w-full space-y-4">
             {/* Header with filters */}
@@ -108,7 +103,7 @@ const NotificationSender = () => {
                 </Button>
               </div>
             </div>
-
+            
             {/* Table */}
             <div className="rounded-lg border bg-white overflow-hidden">
               <Table className="">
@@ -118,23 +113,22 @@ const NotificationSender = () => {
                       NO
                     </TableHead>
                     <TableHead className=" text-base text-gray-700 font-semibold">
-                     Title
+                      Title
                     </TableHead>
                     <TableHead className=" text-base text-gray-700 font-semibold">
-                 Message
+                      Message
                     </TableHead>
 
                     <TableHead className=" text-base text-gray-700 font-semibold">
                       Audience
                     </TableHead>
                     <TableHead className=" text-base text-gray-700 font-semibold">
-                     Date
+                      Date
                     </TableHead>
 
                     <TableHead className=" text-base text-gray-700 font-semibold">
-                     Action
+                      Action
                     </TableHead>
-                   
                   </TableRow>
                 </TableHeader>
 
@@ -161,23 +155,19 @@ const NotificationSender = () => {
                       </TableCell>
 
                       <TableCell className="py-3">
-
                         <button className="w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer">
-                        <div className="relative">
-                          <Image
-                            src={eye}
-                            alt="eye"
-                            height={50}
-                            width={50}
-                            className="object-cover w-6 h-6 object-center"
-                            priority
-                          />
-                        </div>
-                      </button>
-
+                          <div className="relative">
+                            <Image
+                              src={eye}
+                              alt="eye"
+                              height={50}
+                              width={50}
+                              className="object-cover w-6 h-6 object-center"
+                              priority
+                            />
+                          </div>
+                        </button>
                       </TableCell>
-                  
-               
                     </TableRow>
                   ))}
                 </TableBody>
@@ -185,9 +175,6 @@ const NotificationSender = () => {
             </div>
           </div>
         </div>
-
-
-        
       </div>
     </section>
   );

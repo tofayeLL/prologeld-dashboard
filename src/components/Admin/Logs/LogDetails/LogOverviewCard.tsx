@@ -92,8 +92,10 @@ function CircularProgress({
 
 export default function LogOverviewCard() {
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
+    <div className=" ">
+
       <Card className="p-8 bg-white shadow-sm">
+        
         <div className="flex items-start justify-between">
           {/* Left section - Driver info */}
           <div className="space-y-4">
@@ -233,7 +235,9 @@ export default function LogOverviewCard() {
           </div>
           
         </div>
+
       </Card>
+
     </div>
   );
 }
