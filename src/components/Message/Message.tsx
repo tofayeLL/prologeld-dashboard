@@ -560,7 +560,7 @@ export default function Message() {
                 </div>
                 <Button
                   onClick={handleSendGroupMessage}
-                  className="bg-[#00A8CC] hover:bg-[#00A8CC80] h-10 w-10 rounded-xl p-0"
+                  className="bg-[#0D9488] hover:bg-[#368f87] h-10 w-10 rounded-xl p-0"
                 >
                   <Send className="h-5 w-5" />
                 </Button>

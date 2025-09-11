@@ -169,7 +169,7 @@ const Vehicle = () => {
                   <TableCell className="py-3">10-03-2025</TableCell>
                   <TableCell className="py-3">
                     <div className="flex ">
-                      <button className="w-10 h-10 flex items-center justify-center rounded-lg">
+                      <button className="w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer ">
                         <div className="relative">
                           <Image
                             src={eye}
@@ -183,7 +183,7 @@ const Vehicle = () => {
                       </button>
 
                       {/* edit button */}
-                      <button className="w-10 h-10 flex items-center justify-center rounded-lg">
+                      <button className="w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer">
                         <div className="relative">
                           <Image
                             src={edit}
