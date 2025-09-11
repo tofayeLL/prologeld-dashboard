@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState } from "react";
-// import { useState } from "react";
-// import eye from "@/assets/eyeIcon.png";
-// import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -18,17 +15,14 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
-
-// import Image from "next/image";
 import { ExternalLink, Filter, RefreshCw, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-// import { Badge } from "@/components/ui/badge";
 import { useGetAllRespondersQuery } from "@/redux/api/adminApi";
 import { Loading } from "@/components/ui/loading";
-// import userImage from "@/assets/User.png";
 import { Badge } from "@/components/ui/badge";
 import { BiSolidCopy } from "react-icons/bi";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const Logs = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -38,6 +32,15 @@ const Logs = () => {
   const handleCategoryChange = (value: string) => {
     setSelectedCategory(value);
     // Add filtering logic here based on your needs
+  };
+
+  const router = useRouter(); // Initialize router
+
+  // Function to handle row click
+  const handleRowClick = (id: string) => {
+    router.push(`/admin/logs/log_Details`);
+    // // Navigate to details page with ID
+    console.log(id);
   };
 
   if (isLoading) {
@@ -58,9 +61,7 @@ const Logs = () => {
             {/* Header with filters */}
             <div className="flex items-center justify-between l">
               <div className="">
-                <h1 className="text-xl font-semibold text-gray-900">
-                 Logs
-                </h1>
+                <h1 className="text-xl font-semibold text-gray-900">Logs</h1>
               </div>
               <div className="flex lg:flex-row flex-col  items-center gap-4">
                 {/* Search Input */}
@@ -148,6 +149,7 @@ const Logs = () => {
                     <TableRow
                       key={item?.id}
                       className="border-b last:border-b-0"
+                      onClick={() => handleRowClick(item?.id)} // Add click handler
                     >
                       <TableCell className="font-medium text-gray-700 py-3 flex justify-start items-center gap-2">
                         {index + 1}
